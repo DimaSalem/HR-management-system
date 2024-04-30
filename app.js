@@ -8,7 +8,8 @@ function employee(EmployeeID, FullName, Department, Level, ImageURL) {
     this.department = Department;
     this.level = Level;
     this.imageURL = ImageURL;
-    this.Salary = this.netSalary();
+    this.Salary = null;
+    this.netSalary();
 
     employees.push(this);
 }
