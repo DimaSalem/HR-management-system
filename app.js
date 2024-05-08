@@ -1,5 +1,5 @@
 'use strict'
-
+let employees = [];
 let employeeIdCounter = 999;
 const employeeCards = document.getElementById("employeeCards");
 const myForm = document.getElementById("employeeForm");
@@ -14,14 +14,14 @@ function employee(FullName, Department, Level, ImageURL) {
     this.Salary = null;
     this.netSalary();
     this.generateEmployeeID();
-
     this.render();
 
+    employees.push(this);
 }
 
 
 employee.prototype.generateEmployeeID = function () {
-    this.employeeID = employeeIdCounter++;
+    this.employeeID = ++employeeIdCounter;
 }
 
 function getRandomNumber(min, max) {
@@ -35,7 +35,7 @@ function calcSalary(level) {
         case "Mid-Senior":
             return getRandomNumber(1000, 1500);
         case "Junior":
-            return getRandomNumber(500, 1500);
+            return getRandomNumber(500, 1000);
     }
 }
 
@@ -57,7 +57,7 @@ employee.prototype.render = function () {
     employeeCardEl.appendChild(idEl);
 
     let fullNameEl = document.createElement('p');
-    fullNameEl.textContent = `Full Name: ${this.fullName}`;
+    fullNameEl.textContent = `Name: ${this.fullName}`;
     employeeCardEl.appendChild(fullNameEl);
 
     let departmentEl = document.createElement('p');
@@ -71,7 +71,6 @@ employee.prototype.render = function () {
     let salaryEl = document.createElement('p');
     salaryEl.textContent = `Salary: ${this.Salary}`;
     employeeCardEl.appendChild(salaryEl);
-
 
     employeeCards.appendChild(employeeCardEl);
 }
@@ -90,9 +89,25 @@ function handleSubmit(event) {
 
     event.target.reset();
 
+    saveData(employees, "employees");
+
+}
+
+function saveData(data, key) {
+    let stringifyData = JSON.stringify(data);
+    localStorage.setItem(key, stringifyData);
+}
+
+function loadData(key) {
+    let retrievedData = localStorage.getItem(key);
+
+    if (retrievedData != null) {
+        let arrEmployees = JSON.parse(retrievedData);
+        arrEmployees.forEach(Employee => {
+            new employee(Employee.fullName, Employee.department, Employee.level, Employee.imageURL);
+        });
+    }
 }
 
 
-
-
-
+loadData("employees");
