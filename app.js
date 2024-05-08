@@ -67,7 +67,11 @@ employee.prototype.render = function () {
     let levelEl = document.createElement('p');
     levelEl.textContent = `Level: ${this.level}`;
     employeeCardEl.appendChild(levelEl);
-    console.log(employeeCards);
+
+    let salaryEl = document.createElement('p');
+    salaryEl.textContent = `Salary: ${this.Salary}`;
+    employeeCardEl.appendChild(salaryEl);
+
 
     employeeCards.appendChild(employeeCardEl);
 }
