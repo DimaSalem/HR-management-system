@@ -88,9 +88,7 @@ function handleSubmit(event) {
     let newEmployee = new employee(fullName, department, level, imageURL);
 
     event.target.reset();
-
     saveData(employees, "employees");
-
 }
 
 function saveData(data, key) {
@@ -109,5 +107,18 @@ function loadData(key) {
     }
 }
 
+function createEmployeesInstances() {
+    let emp1 = new employee('Ghazi Samer', 'Administration', 'Senior', './image/person.png');
+    let emp2 = new employee('Lana Ali', 'Finance', 'Senior', './image/person.png');
+    let emp3 = new employee('Tamara Ayoub', 'Marketing', 'Senior', './image/person.png');
+    let emp4 = new employee('Safi Walid', 'Administration', 'Mid-Senior', './image/person.png');
+    let emp5 = new employee('Omar Zaid', 'Development', 'Senior', './image/person.png');
+    let emp6 = new employee('Rana Saleh', 'Development', 'Junior', './image/person.png');
+    let emp7 = new employee('Hadi Ahmad', 'Finance', 'Mid-Senior', './image/person.png');
 
+}
+
+
+createEmployeesInstances();
 loadData("employees");
+
